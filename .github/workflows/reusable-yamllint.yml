@@ -1,0 +1,33 @@
+name: Yamllint
+
+on:
+  workflow_call:
+    inputs:
+      strict:
+        description: 'Whether to enable strict mode.'
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  yamllint:
+    name: 'Lint Yaml'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for existence of a Yamllint config file
+        id: has_config
+        uses: andstor/file-existence-action@v3
+        with:
+          files: ".yamllint.y*ml"
+
+      - name: Run Yamllint on all yaml files in repo
+        if: ${{ steps.has_config.outputs.files_exists == 'true' }}
+        run: yamllint . --format colored ${{ inputs.strict && '--strict' || '' }}
+
+      - name: Pipe Yamllint results on to GH for inline display
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        run: yamllint . --format github ${{ inputs.strict && '--strict' || '' }}

@@ -1,0 +1,41 @@
+name: PHPStan
+
+on:
+  workflow_call:
+
+jobs:
+  phpstan:
+    name: "PHPStan"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for existence of a PHPStan config file
+        id: has_config
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "phpstan.neon*"
+
+      - name: Install PHP
+        if: ${{ steps.has_config.outputs.files_exists == 'true' }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 'latest'
+          coverage: none
+          tools: phpstan
+
+      # Install dependencies and handle caching in one go.
+      # Dependencies need to be installed to make sure the PHPUnit classes are recognized.
+      # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
+      - name: Install Composer dependencies
+        if: ${{ steps.has_config.outputs.files_exists == 'true' }}
+        uses: "ramsey/composer-install@v3"
+        with:
+          # Bust the cache at least once a month - output format: YYYY-MM.
+          custom-cache-suffix: $(date -u "+%Y-%m")
+
+      - name: Run PHPStan
+        if: ${{ steps.has_config.outputs.files_exists == 'true' }}
+        run: phpstan analyse

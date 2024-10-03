@@ -1,0 +1,29 @@
+name: Markdownlint
+
+on:
+  workflow_call:
+
+jobs:
+  markdownlint:
+    name: 'Lint Markdown'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for existence of a Markdownlint config file
+        id: has_config
+        uses: andstor/file-existence-action@v3
+        with:
+          files: ".markdownlint-cli2.y*ml"
+
+      # @link https://github.com/marketplace/actions/problem-matcher-for-markdownlint-cli
+      - name: Enable showing issue in PRs
+        if: ${{ steps.has_config.outputs.files_exists == 'true' }}
+        uses: xt0rted/markdownlint-problem-matcher@v3
+
+      # @link https://github.com/marketplace/actions/markdownlint-cli2-action
+      - name: Check markdown with CLI2
+        if: ${{ steps.has_config.outputs.files_exists == 'true' }}
+        uses: DavidAnson/markdownlint-cli2-action@v17
