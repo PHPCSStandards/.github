@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       strict:
-        description: 'Whether to enable strict mode.'
+        description: 'Whether to enable strict mode for yamllint.'
         type: boolean
         required: false
         default: false
@@ -31,3 +31,23 @@ jobs:
       - name: Pipe Yamllint results on to GH for inline display
         if: ${{ failure() && github.event_name == 'pull_request' }}
         run: yamllint . --format github ${{ inputs.strict && '--strict' || '' }}
+
+  actionlint:
+    name: 'Check GHA workflows'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Add problem matcher
+        if: ${{ github.event_name == 'pull_request' }}
+        shell: bash
+        run: |
+          curl -o actionlint-matcher.json https://raw.githubusercontent.com/rhysd/actionlint/main/.github/actionlint-matcher.json
+          echo "::add-matcher::actionlint-matcher.json"
+
+      - name: Check workflow files
+        uses: docker://rhysd/actionlint:latest
+        with:
+          args: -color
