@@ -2,6 +2,12 @@ name: Remark
 
 on:
   workflow_call:
+    inputs:
+      fail-on-warnings:
+        description: 'Whether to exit as failed when there are warnings.'
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   remark:
@@ -64,7 +70,7 @@ jobs:
 
       - name: Run Remark-lint
         if: ${{ steps.has_config.outputs.files_exists == 'true' }}
-        run: remark . --frail
+        run: remark . ${{ inputs.fail-on-warnings && '--frail' || '' }}
 
       # @link https://github.com/reviewdog/action-remark-lint
       - name: Show Remark-lint annotations in PR
