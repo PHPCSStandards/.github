@@ -1,0 +1,17 @@
+name: Markdown
+
+on:
+  # Run on all pushes and on all pull requests.
+  push:
+  pull_request:
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+jobs:
+  markdownlint:
+    name: 'Lint Markdown'
+    uses: ./.github/workflows/reusable-markdownlint.yml
+
+  remark:
+    name: 'QA Markdown'
+    uses: ./.github/workflows/reusable-remark.yml
