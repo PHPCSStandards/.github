@@ -9,6 +9,7 @@ on:
 
 jobs:
   yamllint:
+    name: 'Lint Yaml'
     uses: ./.github/workflows/reusable-yamllint.yml
     with:
       strict: true
