@@ -1,6 +1,7 @@
 ---
 name: "\U0001F41B Bug report"
 about: I got unexpected behavior and think it is a bug.
+title: ''
 ---
 
 <!--
@@ -26,7 +27,7 @@ The issue happens when running this command:
 ```
 
 ... with this configuration:
-```
+```xml
 ```
 
 
@@ -52,4 +53,5 @@ Please include as many details as relevant about the environment you experienced
 
 
 ## Tested Against `develop` branch?
+
 - [ ] I have verified the issue still exists in the `develop` branch of this package.
