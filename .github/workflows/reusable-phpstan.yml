@@ -3,7 +3,7 @@ name: PHPStan
 on:
   workflow_call:
     inputs:
-      version:
+      phpstanVersion:
         description: "The PHPStan version to use. Defaults to the latest available version."
         type: string
         required: false
@@ -27,10 +27,10 @@ jobs:
       - name: Create tools string
         id: tools
         run: |
-          if [ "${{ inputs.version }}" == "" ]; then
+          if [ "${{ inputs.phpstanVersion }}" == "" ]; then
             echo 'TOOLS=phpstan' >> "$GITHUB_OUTPUT"
           else
-            echo 'TOOLS=phpstan:${{ inputs.version }}' >> "$GITHUB_OUTPUT"
+            echo 'TOOLS=phpstan:${{ inputs.phpstanVersion }}' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Install PHP
