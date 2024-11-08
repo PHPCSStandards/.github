@@ -3,6 +3,11 @@ name: PHPStan
 on:
   workflow_call:
     inputs:
+      phpVersion:
+        description: "The PHP version to use. Defaults to 'latest'."
+        type: string
+        required: false
+        default: "latest"
       phpstanVersion:
         description: "The PHPStan version to use. Defaults to the latest available version."
         type: string
@@ -37,7 +42,7 @@ jobs:
         if: ${{ steps.has_config.outputs.files_exists == 'true' }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 'latest'
+          php-version: ${{ inputs.phpVersion }}
           coverage: none
           tools: ${{ steps.tools.outputs.TOOLS }}
 
