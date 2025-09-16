@@ -16,17 +16,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Check for existence of a Remark config file
         id: has_config
-        uses: andstor/file-existence-action@v3
+        uses: andstor/file-existence-action@076e0072799f4942c8bc574a82233e1e4d13e9d6 # v3.0.0
         with:
           files: ".remarkrc"
 
       - name: Set up node and enable caching of dependencies
         if: ${{ steps.has_config.outputs.files_exists == 'true' }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: "20"
 
@@ -75,7 +75,7 @@ jobs:
       # @link https://github.com/reviewdog/action-remark-lint
       - name: Show Remark-lint annotations in PR
         if: ${{ failure() && github.event_name == 'pull_request' }}
-        uses: reviewdog/action-remark-lint@v5
+        uses: reviewdog/action-remark-lint@82225f7db5b4a3caaca3052733b6800fa7d109b0 # v5.18.0
         with:
           fail_level: ${{ inputs.fail-on-warnings && 'warning' || 'error' }}
           install_deps: false
