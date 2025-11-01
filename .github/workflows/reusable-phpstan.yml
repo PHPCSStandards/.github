@@ -13,11 +13,17 @@ on:
         type: string
         required: false
         default: ""
+      environment:
+        description: "Name of a custom defined environment to use."
+        type: string
+        required: false
+        default: ""
 
 jobs:
   phpstan:
     name: "PHPStan"
     runs-on: "ubuntu-latest"
+    environment: ${{ inputs.environment }}
 
     steps:
       - name: Checkout code
