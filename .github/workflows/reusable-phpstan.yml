@@ -48,6 +48,11 @@ jobs:
           coverage: none
           tools: ${{ steps.tools.outputs.TOOLS }}
 
+      # Remove PHPCSDevCS to prevent circular dependency issues for repos using this workflow
+      # while also being a dependency of PHPCSDevCS.
+      - name: 'Composer: remove PHPCSDevCS'
+        run: composer remove --dev phpcsstandards/phpcsdevcs --no-update --no-interaction
+
       # Install dependencies and handle caching in one go.
       # Dependencies need to be installed to make sure the PHPUnit classes are recognized.
       # @link https://github.com/marketplace/actions/install-php-dependencies-with-composer
