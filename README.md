@@ -32,9 +32,9 @@ It also means that, as the configuration for each tool is always in a committed 
 
 The following re-usable workflows are available:
 * [`reusable-markdownlint.yml`][reusable-markdownlint] which runs a (code-style) [linter for Markdown/CommonMark files][markdownlint-cli2].  
-    **Requires**: a `.markdownlint-cli2.y*ml` configuration file in the project root.
+    **Requires**: a `.markdownlint-cli2.yml` or `.markdownlint-cli2.yaml` configuration file in the project root.
 * [`reusable-phpstan.yml`][reusable-phpstan] which runs the [PHPStan] tool.  
-    **Requires**: a `phpstan.neon*` configuration file in the project root.  
+    **Requires**: a `phpstan.neon.dist` or `phpstan.neon` configuration file in the project root.  
     **Inputs**:
     - `phpVersion`: Optional. The PHP version to use. Defaults to 'latest'.
     - `phpstanVersion`: Optional. The PHPStan version to use. Defaults to the latest available version.
@@ -45,7 +45,7 @@ The following re-usable workflows are available:
     - `fail-on-warnings`: Optional. Whether to exit as failed when there are warnings. Defaults to "true".
 * [`reusable-yamllint.yml`][reusable-yamllint] which runs two linters for Yaml files.
     1. [yamllint] which checks all YAML files for syntax validity, code style and runs some QA checks too.  
-        **Requires**: a `.yamllint.y*ml` configuration file in the project root.  
+        **Requires**: a `.yamllint.yml` or `.yamllint.yaml` configuration file in the project root.  
         **Inputs**:
         + `strict`: Optional. Whether to enable strict mode. Defaults to "false".
     2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.
