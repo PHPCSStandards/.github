@@ -20,7 +20,18 @@
     "remark-lint-no-reference-like-url",
     "remark-lint-no-shortcut-reference-image",
     "remark-lint-no-table-indentation",
-    "remark-lint-no-undefined-references",
+    [
+        "remark-lint-no-undefined-references",
+        {
+            "allow": [
+                "!NOTE",
+                "!TIP",
+                "!IMPORTANT",
+                "!WARNING",
+                "!CAUTION"
+            ]
+        }
+    ],
     "remark-lint-no-unneeded-full-reference-image",
     "remark-lint-no-unneeded-full-reference-link",
     "remark-lint-no-unused-definitions",
