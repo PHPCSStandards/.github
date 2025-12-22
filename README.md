@@ -66,6 +66,9 @@ This has two benefits:
 2. **Security**  
     With commit-hash pinned workflows, the dependencies used are fixed to specific versions and updates are managed, which means that it is more difficult for an attacker to be able to infiltrate the workflow runs and get access to secrets and/or cause other havoc.
 
+> [!IMPORTANT]  
+> It is best practice for tags for repositories which will be used in GitHub Actions workflows to be prefixed with `v` before the version number, so tags in this repository should start with a `v` prefix too.
+
 
 [community health files]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
 
