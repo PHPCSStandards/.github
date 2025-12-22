@@ -16,7 +16,7 @@ Additional community health files may be added over time and/or when GitHub adds
 
 ## Re-usable workflows
 
-Aside from the community health files, this repository also offers a number of configuration file driven re-usable GitHub Actions workflows.
+Aside from the community health files, this repository also offers a number of (mostly) configuration file driven re-usable GitHub Actions workflows.
 
 ### What does "configuration file driven" mean and why are the workflows set up that way ?
 
@@ -49,7 +49,10 @@ The following re-usable workflows are available:
         **Inputs**:
         + `strict`: Optional. Whether to enable strict mode. Defaults to "false".
     2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.
-        _Note: this is the only check without a configuration file requirement._
+        _Note: this check does not have a configuration file requirement._
+* [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.  
+    These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.  
+    _Note: this check does not have a configuration file requirement._
 
 Example configuration files for most of these can be found in the root directory of this repository.
 
@@ -70,17 +73,19 @@ This has two benefits:
 > It is best practice for tags for repositories which will be used in GitHub Actions workflows to be prefixed with `v` before the version number, so tags in this repository should start with a `v` prefix too.
 
 
-[community health files]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
+[community health files]:  https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
 
-[reusable-markdownlint]:  https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-markdownlint.yml
-[markdownlint-cli2]:      https://github.com/DavidAnson/markdownlint-cli2
+[reusable-markdownlint]:   https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-markdownlint.yml
+[markdownlint-cli2]:       https://github.com/DavidAnson/markdownlint-cli2
 
-[reusable-phpstan]:       https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-phpstan.yml
-[phpstan]:                https://phpstan.org/
+[reusable-phpstan]:        https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-phpstan.yml
+[phpstan]:                 https://phpstan.org/
 
-[reusable-remark]:        https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-remark.yml
-[remark-lint]:            https://github.com/remarkjs/remark-lint
+[reusable-remark]:         https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-remark.yml
+[remark-lint]:             https://github.com/remarkjs/remark-lint
 
-[reusable-yamllint]:      https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-yamllint.yml
-[yamllint]:               https://yamllint.readthedocs.io/en/stable/
-[actionlint]:             https://github.com/rhysd/actionlint
+[reusable-yamllint]:       https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-yamllint.yml
+[yamllint]:                https://yamllint.readthedocs.io/en/stable/
+[actionlint]:              https://github.com/rhysd/actionlint
+
+[reusable-findtokenprops]: https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-findtokenprops.yml
