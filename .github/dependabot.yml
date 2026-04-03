@@ -9,7 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: "cron"
-      cronjob: "10 22 5,20 * *" # At 22:10, every 5th and 20th day of the month.
+      cronjob: "45 23 4,19 * *" # At 23:45, every 4th and 19th day of the month.
     open-pull-requests-limit: 5
     commit-message:
       prefix: "GH Actions:"
