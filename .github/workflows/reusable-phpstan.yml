@@ -47,6 +47,8 @@ jobs:
           php-version: ${{ inputs.phpVersion }}
           coverage: none
           tools: ${{ steps.tools.outputs.TOOLS }}
+        env:
+          fail-fast: true
 
       # Remove PHPCSDevCS to prevent circular dependency issues for repos using this workflow
       # while also being a dependency of PHPCSDevCS.
