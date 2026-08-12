@@ -4,7 +4,7 @@
 
 PHP_CodeSniffer standards and configuration are not sandboxed.
 
-Rulesets may load and execute PHP code supplied by the analyzed project, including custom sniffs and autoloaded files. 
+Rulesets may load and execute PHP code supplied by the analyzed project, including custom sniffs and autoloaded files.
 Repository-local PHPCS configuration should therefore be treated as executable project code.
 
 Running PHP_CodeSniffer against an untrusted or attacker-modifiable checkout must be treated in the same way as running that checkout's tests, build scripts, or other development tooling.
