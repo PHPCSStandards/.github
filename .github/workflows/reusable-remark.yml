@@ -9,8 +9,14 @@ on:
         required: false
         default: true
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   remark:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'QA Markdown'
     runs-on: ubuntu-latest
 

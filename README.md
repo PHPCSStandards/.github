@@ -33,26 +33,32 @@ It also means that, as the configuration for each tool is always in a committed 
 The following re-usable workflows are available:
 * [`reusable-markdownlint.yml`][reusable-markdownlint] which runs a (code-style) [linter for Markdown/CommonMark files][markdownlint-cli2].  
     **Requires**: a `.markdownlint-cli2.yml` or `.markdownlint-cli2.yaml` configuration file in the project root.
+    **Permissions needed**: `contents: read`.
 * [`reusable-phpstan.yml`][reusable-phpstan] which runs the [PHPStan] tool.  
     **Requires**: a `phpstan.neon.dist` or `phpstan.neon` configuration file in the project root.  
     **Inputs**:
     - `phpVersion`: Optional. The PHP version to use. Defaults to 'latest'.
     - `phpstanVersion`: Optional. The PHPStan version to use. Defaults to the latest available version.
+    **Permissions needed**: `contents: read`.
 * [`reusable-remark.yml`][reusable-remark] which runs a different [linter for Markdown files][remark-lint] which typically runs more QA-style checks, like checking for broken links.  
     **Requires**: a `.remarkrc` configuration file in the project root.  
     Optionally, a project can also include a `.remarkignore` file in the project root. This file will be respected, but has no influence on whether the tool will run.  
     **Inputs**:
     - `fail-on-warnings`: Optional. Whether to exit as failed when there are warnings. Defaults to "true".
+    **Permissions needed**: `contents: read`.
 * [`reusable-yamllint.yml`][reusable-yamllint] which runs two linters for Yaml files.
     1. [yamllint] which checks all YAML files for syntax validity, code style and runs some QA checks too.  
         **Requires**: a `.yamllint.yml` or `.yamllint.yaml` configuration file in the project root.  
         **Inputs**:
         + `strict`: Optional. Whether to enable strict mode. Defaults to "false".
+        **Permissions needed**: `contents: read`.
     2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.
         _Note: this check does not have a configuration file requirement._
+        **Permissions needed**: `contents: read`.
 * [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.  
     These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.  
     _Note: this check does not have a configuration file requirement._
+    **Permissions needed**: `contents: read`.
 
 Example configuration files for most of these can be found in the root directory of this repository.
 
