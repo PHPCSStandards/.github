@@ -19,3 +19,10 @@ jobs:
     uses: ./.github/workflows/reusable-yamllint.yml
     with:
       strict: true
+
+  pinact:
+    permissions:
+      contents: read # To clone the repo.
+
+    name: 'Run Pinact'
+    uses: ./.github/workflows/reusable-pinact.yml
