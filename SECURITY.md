@@ -1,5 +1,17 @@
 # Security Policy
 
+## Trust model
+
+PHP_CodeSniffer standards and configuration are not sandboxed.
+
+Rulesets for PHP_CodeSniffer will instruct PHP_CodeSniffer to load and execute PHP code supplied by PHP_CodeSniffer itself and the CodeSniffer related dependencies of the analyzed project.  
+Rulesets may also contain instructions to load and execute PHP code supplied by the analyzed project, including custom sniffs and explicitly autoloaded files.  
+Repository-local PHPCS configuration should therefore be treated as executable project code.
+
+Running PHP_CodeSniffer against an untrusted or attacker-modifiable checkout must be treated in the same way as running that checkout's tests, build scripts, or other development tooling.
+
+CI environments processing untrusted contributions are responsible for appropriate isolation, including restricting access to credentials, secrets, privileged services, and sensitive network resources.
+
 ## Supported Versions
 
 For all repositories in the PHPCSStandards organisation, the latest patch version of the current major is supported for security updates.
