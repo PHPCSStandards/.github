@@ -3,8 +3,14 @@ name: Markdownlint
 on:
   workflow_call:
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   markdownlint:
+    permissions:
+      contents: read # To clone the repo.
+
     name: 'Lint Markdown'
     runs-on: ubuntu-latest
 

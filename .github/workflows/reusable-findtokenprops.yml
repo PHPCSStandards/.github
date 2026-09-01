@@ -3,8 +3,14 @@ name: FindTokenPropertiesRefs
 on:
   workflow_call:
 
+# Permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   find-token-properties:
+    permissions:
+      contents: read # To clone the repo.
+
     # The properties in the PHPCS Tokens class have been deprecated since PHPCS 4.0.0.
     name: 'Find use of Tokens properties'
     runs-on: windows-latest
