@@ -52,9 +52,13 @@ The following re-usable workflows are available:
         **Inputs**:
         + `strict`: Optional. Whether to enable strict mode. Defaults to "false".
         **Permissions needed**: `contents: read`.
-    2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.
+    2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.  
         _Note: this check does not have a configuration file requirement._
         **Permissions needed**: `contents: read`.
+* [`reusable-pinact.yml`][reusable-pinact] which verifies that all action runners used in GitHub Actions workflows are pinned to valid commit hashes with a valid trailing comment annotating the corresponding tag.  
+    The [pinact] tooling and [associated action runner][pinact-action] support various options. The reusable workflow uses quite a strict combination of settings and only checks, it doesn't fix. It will respect settings provided in the configurestion file, but if you want to have more detailed control over how pinact runs, this reusable workflow may not be the right choice.  
+    **Requires**: a `.pinact.yaml` configuration file in the project root.
+    **Permissions needed**: `contents: read`.
 * [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.  
     These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.  
     _Note: this check does not have a configuration file requirement._
@@ -93,5 +97,9 @@ This has two benefits:
 [reusable-yamllint]:       https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-yamllint.yml
 [yamllint]:                https://yamllint.readthedocs.io/en/stable/
 [actionlint]:              https://github.com/rhysd/actionlint
+
+[reusable-pinact]:         https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-pinact.yml
+[pinact]:                  https://github.com/suzuki-shunsuke/pinact
+[pinact-action]:           https://github.com/suzuki-shunsuke/pinact-action
 
 [reusable-findtokenprops]: https://github.com/PHPCSStandards/.github/blob/main/.github/workflows/reusable-findtokenprops.yml
