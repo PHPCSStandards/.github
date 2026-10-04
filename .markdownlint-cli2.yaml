@@ -76,6 +76,11 @@ config:
     # Only check sibling headings.
     siblings_only: true
 
+  # MD033/no-inline-html - Inline HTML.
+  MD033:
+    allowed_elements:
+      - br
+
   # MD044/proper-names - Proper names should have the correct capitalization.
   MD044:
     # List of proper names.

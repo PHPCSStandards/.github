@@ -8,7 +8,7 @@ Default [community health files] for all repositories in this organisation.
 * [FUNDING](FUNDING.yml)
 * [SECURITY](SECURITY.md)
 
-Individual repositories can overrule the default files by committing their own version of one or more of these files to the repository in question.  
+Individual repositories can overrule the default files by committing their own version of one or more of these files to the repository in question.<br/>
 _Keep in mind that doing so is discouraged in this organisation._
 
 Additional community health files may be added over time and/or when GitHub adds support for them.
@@ -31,37 +31,37 @@ It also means that, as the configuration for each tool is always in a committed 
 ### Available re-usable workflows
 
 The following re-usable workflows are available:
-* [`reusable-markdownlint.yml`][reusable-markdownlint] which runs a (code-style) [linter for Markdown/CommonMark files][markdownlint-cli2].  
-    **Requires**: a `.markdownlint-cli2.yml` or `.markdownlint-cli2.yaml` configuration file in the project root.
+* [`reusable-markdownlint.yml`][reusable-markdownlint] which runs a (code-style) [linter for Markdown/CommonMark files][markdownlint-cli2].<br/>
+    **Requires**: a `.markdownlint-cli2.yml` or `.markdownlint-cli2.yaml` configuration file in the project root.<br/>
     **Permissions needed**: `contents: read`.
-* [`reusable-phpstan.yml`][reusable-phpstan] which runs the [PHPStan] tool.  
-    **Requires**: a `phpstan.neon.dist` or `phpstan.neon` configuration file in the project root.  
+* [`reusable-phpstan.yml`][reusable-phpstan] which runs the [PHPStan] tool.<br/>
+    **Requires**: a `phpstan.neon.dist` or `phpstan.neon` configuration file in the project root.<br/>
+    **Permissions needed**: `contents: read`.<br/>
     **Inputs**:
     - `phpVersion`: Optional. The PHP version to use. Defaults to 'latest'.
     - `phpstanVersion`: Optional. The PHPStan version to use. Defaults to the latest available version.
-    **Permissions needed**: `contents: read`.
-* [`reusable-remark.yml`][reusable-remark] which runs a different [linter for Markdown files][remark-lint] which typically runs more QA-style checks, like checking for broken links.  
-    **Requires**: a `.remarkrc` configuration file in the project root.  
-    Optionally, a project can also include a `.remarkignore` file in the project root. This file will be respected, but has no influence on whether the tool will run.  
+* [`reusable-remark.yml`][reusable-remark] which runs a different [linter for Markdown files][remark-lint] which typically runs more QA-style checks, like checking for broken links.<br/>
+    **Requires**: a `.remarkrc` configuration file in the project root.<br/>
+    Optionally, a project can also include a `.remarkignore` file in the project root. This file will be respected, but has no influence on whether the tool will run.<br/>
+    **Permissions needed**: `contents: read`.<br/>
     **Inputs**:
     - `fail-on-warnings`: Optional. Whether to exit as failed when there are warnings. Defaults to "true".
-    **Permissions needed**: `contents: read`.
 * [`reusable-yamllint.yml`][reusable-yamllint] which runs two linters for Yaml files.
-    1. [yamllint] which checks all YAML files for syntax validity, code style and runs some QA checks too.  
-        **Requires**: a `.yamllint.yml` or `.yamllint.yaml` configuration file in the project root.  
+    1. [yamllint] which checks all YAML files for syntax validity, code style and runs some QA checks too.<br/>
+        **Requires**: a `.yamllint.yml` or `.yamllint.yaml` configuration file in the project root.<br/>
+        **Permissions needed**: `contents: read`.<br/>
         **Inputs**:
         + `strict`: Optional. Whether to enable strict mode. Defaults to "false".
+    2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.<br/>
+        _Note: this check does not have a configuration file requirement._<br/>
         **Permissions needed**: `contents: read`.
-    2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.  
-        _Note: this check does not have a configuration file requirement._
-        **Permissions needed**: `contents: read`.
-* [`reusable-pinact.yml`][reusable-pinact] which verifies that all action runners used in GitHub Actions workflows are pinned to valid commit hashes with a valid trailing comment annotating the corresponding tag.  
-    The [pinact] tooling and [associated action runner][pinact-action] support various options. The reusable workflow uses quite a strict combination of settings and only checks, it doesn't fix. It will respect settings provided in the configurestion file, but if you want to have more detailed control over how pinact runs, this reusable workflow may not be the right choice.  
-    **Requires**: a `.pinact.yaml` configuration file in the project root.
+* [`reusable-pinact.yml`][reusable-pinact] which verifies that all action runners used in GitHub Actions workflows are pinned to valid commit hashes with a valid trailing comment annotating the corresponding tag.<br/>
+    The [pinact] tooling and [associated action runner][pinact-action] support various options. The reusable workflow uses quite a strict combination of settings and only checks, it doesn't fix. It will respect settings provided in the configurestion file, but if you want to have more detailed control over how pinact runs, this reusable workflow may not be the right choice.<br/>
+    **Requires**: a `.pinact.yaml` configuration file in the project root.<br/>
     **Permissions needed**: `contents: read`.
-* [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.  
-    These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.  
-    _Note: this check does not have a configuration file requirement._
+* [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.<br/>
+    These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.<br/>
+    _Note: this check does not have a configuration file requirement._<br/>
     **Permissions needed**: `contents: read`.
 
 Example configuration files for most of these can be found in the root directory of this repository.
@@ -72,14 +72,14 @@ Example configuration files for most of these can be found in the root directory
 While it may be uncommon for a `.github` repository to contain tags, the tags are to allow workflows in repositories which _use_ the above mentioned re-usable workflows to "pin" to a specific version of a workflow in a way that Dependabot can still update them.
 
 This has two benefits:
-1. **Stability**  
-    A change in the re-usable workflow itself, or in an action runner used by a re-usable workflow, can "break" builds.  
-    For example, an update of the `DavidAnson/markdownlint-cli2-action` action runner in the [reusable-markdownlint] workflow, may contain a newer version of the `markdownlint` tooling, which may contain new rules which could fail builds in repositories using the workflow.  
+1. **Stability**<br/>
+    A change in the re-usable workflow itself, or in an action runner used by a re-usable workflow, can "break" builds.<br/>
+    For example, an update of the `DavidAnson/markdownlint-cli2-action` action runner in the [reusable-markdownlint] workflow, may contain a newer version of the `markdownlint` tooling, which may contain new rules which could fail builds in repositories using the workflow.<br/>
     Pinning and letting Dependabot update these pins prevents these type of "unmanaged" CI breaks.
-2. **Security**  
+2. **Security**<br/>
     With commit-hash pinned workflows, the dependencies used are fixed to specific versions and updates are managed, which means that it is more difficult for an attacker to be able to infiltrate the workflow runs and get access to secrets and/or cause other havoc.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]<br/>
 > It is best practice for tags for repositories which will be used in GitHub Actions workflows to be prefixed with `v` before the version number, so tags in this repository should start with a `v` prefix too.
 
 
