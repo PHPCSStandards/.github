@@ -31,8 +31,16 @@ It also means that, as the configuration for each tool is always in a committed 
 ### Available re-usable workflows
 
 The following re-usable workflows are available:
+* [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.<br/>
+    These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.<br/>
+    _Note: this check does not have a configuration file requirement._<br/>
+    **Permissions needed**: `contents: read`.
 * [`reusable-markdownlint.yml`][reusable-markdownlint] which runs a (code-style) [linter for Markdown/CommonMark files][markdownlint-cli2].<br/>
     **Requires**: a `.markdownlint-cli2.yml` or `.markdownlint-cli2.yaml` configuration file in the project root.<br/>
+    **Permissions needed**: `contents: read`.
+* [`reusable-pinact.yml`][reusable-pinact] which verifies that all action runners used in GitHub Actions workflows are pinned to valid commit hashes with a valid trailing comment annotating the corresponding tag.<br/>
+    The [pinact] tooling and [associated action runner][pinact-action] support various options. The reusable workflow uses quite a strict combination of settings and only checks, it doesn't fix. It will respect settings provided in the configurestion file, but if you want to have more detailed control over how pinact runs, this reusable workflow may not be the right choice.<br/>
+    **Requires**: a `.pinact.yaml` configuration file in the project root.<br/>
     **Permissions needed**: `contents: read`.
 * [`reusable-phpstan.yml`][reusable-phpstan] which runs the [PHPStan] tool.<br/>
     **Requires**: a `phpstan.neon.dist` or `phpstan.neon` configuration file in the project root.<br/>
@@ -55,14 +63,6 @@ The following re-usable workflows are available:
     2. [actionlint] which runs a static analysis check on GitHub Actions workflow files only.<br/>
         _Note: this check does not have a configuration file requirement._<br/>
         **Permissions needed**: `contents: read`.
-* [`reusable-pinact.yml`][reusable-pinact] which verifies that all action runners used in GitHub Actions workflows are pinned to valid commit hashes with a valid trailing comment annotating the corresponding tag.<br/>
-    The [pinact] tooling and [associated action runner][pinact-action] support various options. The reusable workflow uses quite a strict combination of settings and only checks, it doesn't fix. It will respect settings provided in the configurestion file, but if you want to have more detailed control over how pinact runs, this reusable workflow may not be the right choice.<br/>
-    **Requires**: a `.pinact.yaml` configuration file in the project root.<br/>
-    **Permissions needed**: `contents: read`.
-* [`reusable-findtokenprops.yml`][reusable-findtokenprops] to find any uses of the PHPCS static `Tokens::$groupName` properties.<br/>
-    These properties have been (soft) deprecated since PHP_CodeSniffer 4.0.0 and should no longer be used in code bases which have dropped support for PHP_CodeSniffer 3.x.<br/>
-    _Note: this check does not have a configuration file requirement._<br/>
-    **Permissions needed**: `contents: read`.
 
 Example configuration files for most of these can be found in the root directory of this repository.
 
