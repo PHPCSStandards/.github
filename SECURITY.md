@@ -12,6 +12,9 @@ Running PHP_CodeSniffer against an untrusted or attacker-modifiable checkout mus
 
 CI environments processing untrusted contributions are responsible for appropriate isolation, including restricting access to credentials, secrets, privileged services, and sensitive network resources.
 
+PHP_CodeSniffer is intended to scan valid PHP code. It is the responsibility of projects using PHP_CodeSniffer to validate code against parse errors before scanning such code with PHP_CodeSniffer.
+Attack vectors which can only be triggered by an attacker introducing deliberate parse errors in otherwise valid code, do not classify as security vulnerabilities. They do qualify for security hardening and reports are appreciated.
+
 ## Supported Versions
 
 For all repositories in the PHPCSStandards organisation, the latest patch version of the current major is supported for security updates.
